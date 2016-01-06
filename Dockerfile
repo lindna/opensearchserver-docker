@@ -1,0 +1,14 @@
+FROM debian:jessie
+
+ENV DEBIAN_FRONTEND noninteractive
+
+RUN apt-get update -y && apt-get install -y openjdk-7-jdk && apt-get install -y curl
+
+RUN curl -o opensearchserver.deb -L http://sourceforge.net/projects/opensearchserve/files/Stable_release/1.5.13/opensearchserver-1.5.13-2b6dfa4.deb/download
+
+RUN dpkg -i opensearchserver.deb
+
+ADD start_opensearchserver.sh /start_opensearchserver.sh
+RUN chmod +x /start_opensearchserver.sh
+
+CMD /start_opensearchserver.sh && tail -F /var/log/opensearchserver/server.out
