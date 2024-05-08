@@ -1,11 +1,8 @@
-FROM debian:jessie
+FROM ubuntu:22.04
 
 ENV DEBIAN_FRONTEND noninteractive
 
 RUN apt-get update -y && apt-get install -y openjdk-7-jdk && apt-get install -y curl
-
-RUN groupadd -g 100 opensearchserver || true
-RUN useradd -m --gid 100 --uid 1032 -s /bin/bash -d /var/lib/opensearchserver opensearchserver
 
 RUN curl -o opensearchserver.deb -L https://sourceforge.net/projects/opensearchserve/files/Stable_release/1.5.14/opensearchserver-1.5.14-d0d167e.deb/download
 
